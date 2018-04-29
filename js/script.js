@@ -5,6 +5,7 @@ var vm = new Vue({
             studentCodeOne: "",
             studentCodeTwo: "",
             dijkstraName: "",
+            submissionSelection: "onTime",
             mainPoints: {
                 waitingLinePoints: 0,
                 sortingPoints: 0,

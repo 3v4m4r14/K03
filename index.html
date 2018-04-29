@@ -189,6 +189,30 @@
             </div>
         </form>
     </div>
+
+    <hr>
+
+    <div id="latePenalty">
+        <form id="latePenaltyForm">
+            <div class="box-header">
+                <h3>Esitatud</h3>
+            </div>
+            <div class="box-with-margin">
+                <div class="form-check col-sm">
+                    <input id="onTime" name="submissionSelection" v-model="submissionSelection" class="form-check-input" value="onTime" type="radio" required>
+                    <label for="onTime">Õigeaegselt</label>
+                </div>
+                <div class="form-check col-sm">
+                    <input id="lateOneWeek" name="submissionSelection" v-model="submissionSelection" class="form-check-input" value="lateOneWeek" type="radio" required>
+                    <label for="lateOneWeek">Hilinemisega 1 nädal</label>
+                </div>
+                <div class="form-check col-sm">
+                    <input id="lateForMore" name="submissionSelection" v-model="submissionSelection" class="form-check-input" value="lateForMore" type="radio" required>
+                    <label for="lateForMore">Hilinemisega rohkem kui 1 nädal</label>
+                </div>
+            </div>
+        </form>
+    </div>
 </main>
 
 
