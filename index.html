@@ -210,8 +210,64 @@
                     <input id="lateForMore" name="submissionSelection" v-model="submissionSelection" class="form-check-input" value="lateForMore" type="radio" required>
                     <label for="lateForMore">Hilinemisega rohkem kui 1 nädal</label>
                 </div>
+
+                <div class="row">
+                    <div class="col-sm">
+                        <h5>Trahvipunkte: {{latePenaltyTotal}}</h5>
+                    </div>
+                </div>
             </div>
         </form>
+    </div>
+
+    <hr>
+
+    <div id="data">
+        <div class="box-header">
+            <h3>Tulemus</h3>
+        </div>
+        <div class="box-with-margin">
+            <table class="table table-striped">
+                <!--<thead>
+                <tr>
+                    <th scope="col">Üliõpilaskood 1</th>
+                    <th scope="col">Üliõpilaskood 2</th>
+                    <th scope="col">Last</th>
+                    <th scope="col">Handle</th>
+                </tr>
+                </thead>-->
+                <tbody>
+                <tr>
+                    <th scope="row">Üliõpilaskood 1</th>
+                    <td>{{studentCodeOne}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Üliõpilaskood 2</th>
+                    <td>{{studentCodeTwo}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Dijkstra kasutajanimi</th>
+                    <td>{{dijkstraName}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Baasülesande punktid</th>
+                    <td>{{mainPointsTotal}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Lisapunktid</th>
+                    <td>{{extraPointsTotal}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Trahvipunktid hilinemise eest</th>
+                    <td>{{latePenaltyTotal}}</td>
+                </tr>
+                <tr class="bg-primary">
+                    <th scope="row">Punktid kokku</th>
+                    <td>{{pointsTotal}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </main>
 
