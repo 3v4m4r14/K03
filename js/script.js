@@ -2,68 +2,83 @@ var vm = new Vue({
     el: "#app",
     data: function () {
         return {
-            studentCodeOne: "",
-            studentCodeTwo: "",
-            dijkstraName: "",
-            submissionSelection: "onTime",
-            penalty: 0,
-            mainPoints: {
-                waitingLinePoints: 0,
-                sortingPoints: 0,
-                extraTaskPoints: 0,
-                livesPoints: 0,
-                restartPoints: 0,
-                animationPoints: 0,
-                total: 0
-            },
-            extraPoints: {
-                goodDesign: false,
-                designSupportsTheme: false,
-                goodAppearances: false,
-                goodSortingFeedback: false,
-                goodExtraTaskEpisode: false,
-                goodFailureFeedback: false,
-                feedbackSound: false,
-                learnability: false,
-                dragAndDrop: false,
-                responsiveDesign: false,
-                total: 0
-            }
+            currentIndex: 0,
+            students: [
+                { code: "155408IAPB", name: "Eva Maria Veitmaa" },
+                { code: "155202IAPB", name: "Ingmar Trump" }
+            ],
+            works: [
+            {
+                studentCodeOne: "155408IAPB",
+                studentCodeTwo: "155202IAPB", 
+                dijkstraAddress: "CLICKABLE AND VERY LONNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNG ADDRESS", 
+                requiements: {
+                    waitingLine: false,
+                    sorting: false,
+                    extraTask: false,
+                    lives: false,
+                    restarting: false,
+                    animations: false
+                }, 
+                alternativeRequirements: false,
+                requiementsComment: "",
+                extras: {
+                    goodDesign: false,
+                    designSupportsTheme: false,
+                    goodAppearances: false,
+                    goodSortingFeedback: false,
+                    goodExtraTaskEpisode: false,
+                    goodFailureFeedback: false,
+                    feedbackSound: false,
+                    learnability: false,
+                    dragAndDrop: false,
+                    responsiveDesign: false,
+                }, 
+                extraExtraPoints: 0,
+                extraPenalty: 0, 
+                extrasComments: "", 
+                submitted: "onTime", 
+                submittedComment: ""
+            }]
         }
     },
     computed: {
-        mainPointsTotal: function () {
-            this.mainPoints.total = parseInt(this.mainPoints.waitingLinePoints)
-                + parseInt(this.mainPoints.sortingPoints)
-                + parseInt(this.mainPoints.extraTaskPoints)
-                + parseInt(this.mainPoints.livesPoints)
-                + parseInt(this.mainPoints.restartPoints)
-                + parseInt(this.mainPoints.animationPoints);
-            return this.mainPoints.total;
+        current: function () {
+            return this.works[this.currentIndex];
+        },
+        isBaseDone: function () {
+            if (this.current.requiements.alternativeRequirements) return true; 
+            for (key in this.current.requiements) {
+                if (!this.current.requiements[key]) return false;
+            }
+            return true;
+        },
+        isBaseDoneString: function () {
+            return this.isBaseDone ? "Korras" : "Puudulik";
         },
         extraPointsTotal: function () {
-            this.extraPoints.total = 0;
-            for (item in this.extraPoints) {
-                if (this.extraPoints[item] === true) {
-                    this.extraPoints.total++;
+            var total = 0;
+            for (key in this.current.extras) {
+                if (this.current.extras[key]) {
+                    total++;
                 }
             }
-            return this.extraPoints.total;
+            return total;
         },
         latePenaltyTotal: function () {
-            if (this.submissionSelection === "onTime") {
-                this.penalty = 0;
+            if (this.current.submitted === "lateForMore") {
+                return -5
             }
-            if (this.submissionSelection === "lateOneWeek") {
-                this.penalty = -2;
+            if (this.current.submitted === "lateOneWeek") {
+                return -2;
             }
-            if (this.submissionSelection === "lateForMore") {
-                this.penalty = -5
+            if (this.current.submitted === "onTime") {
+                return 0;
             }
-            return this.penalty;
         },
         pointsTotal: function () {
-            return this.mainPoints.total + this.extraPoints.total + this.penalty;
+            if (!this.isBaseDone) return 0;
+            return 10 + this.extraPointsTotal + this.current.extraPenalty + this.latePenaltyTotal;
         }
     },
     methods: {}

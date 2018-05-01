@@ -36,19 +36,19 @@
                 <div class="row">
                     <div class="form-group col-sm">
                         <label for="studentCodeOne">Üliõpilaskood 1<span class="req"> *</span></label>
-                        <input id="studentCodeOne" class="form-control" v-model="studentCodeOne" type="text" required>
+                        <input id="studentCodeOne" class="form-control" v-model="current.studentCodeOne" type="text" required>
                     </div>
 
                     <div class="form-group col-sm">
                         <label for="studentCodeTwo">Üliõpilaskood 2</label>
-                        <input id="studentCodeTwo" class="form-control" v-model="studentCodeTwo" type="text" required>
+                        <input id="studentCodeTwo" class="form-control" v-model="current.studentCodeTwo" type="text" required>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="form-group col-sm-6">
-                        <label for="dijkstraName">Dijkstra kasutajanimi<span class="req"> *</span></label>
-                        <input id="dijkstraName" class="form-control" v-model="dijkstraName" type="text" required>
+                        <label for="dijkstraAddress">Dijkstra kasutajanimi<span class="req"> *</span></label>
+                        <input id="dijkstraAddress" class="form-control" v-model="current.dijkstraAddress" type="text" required>
                     </div>
                 </div>
             </div>
@@ -57,64 +57,46 @@
 
     <hr>
 
-    <div id="mainPoints">
-        <form id="mainPointsForm">
+    <div id="extraPoints">
+        <form id="extraPointsForm">
             <div class="box-header">
-                <h3>Baasülesande punktid</h3>
+                <h3>Baasülesanded</h3>
             </div>
             <div class="box-with-margin">
-                <div class="row">
-                    <div class="form-group col-sm">
-                        <label for="waitingLinePoints">Ootejärjekord<span class="req"> *</span></label>
-                        <input id="waitingLinePoints" class="form-control" type="number" value="0" min="0"
-                               v-model="mainPoints.waitingLinePoints" required>
-                    </div>
+                <div class="form-check">
+                    <input id="waitingLine" class="form-check-input" type="checkbox" v-model="current.requiements.waitingLine">
+                    <label class="form-check-label" for="waitingLine">Ootejärjekord</label>
                 </div>
 
-                <div class="row">
-                    <div class="form-group col-sm">
-                        <label for="sortingPoints">Sortimine (lohistamine või klõps)<span class="req"> *</span></label>
-                        <input id="sortingPoints" class="form-control" type="number" value="0" min="0" v-model="mainPoints.sortingPoints"
-                               required>
-                    </div>
+                <div class="form-check">
+                    <input id="sorting" class="form-check-input" type="checkbox"
+                           v-model="current.requiements.sorting">
+                    <label class="form-check-label" for="sorting">Sortimine (lohistamine või klõps)</label>
                 </div>
 
-                <div class="row">
-                    <div class="form-group col-sm">
-                        <label for="extraTaskPoints">Tähtajaline lisaülesanne<span class="req"> *</span></label>
-                        <input id="extraTaskPoints" class="form-control" type="number" v-model="mainPoints.extraTaskPoints"
-                               value="0" min="0" required>
-                    </div>
+                <div class="form-check">
+                    <input id="extraTask" class="form-check-input" type="checkbox" v-model="current.requiements.extraTask">
+                    <label class="form-check-label" for="extraTask">Tähtajaline lisaülesanne</label>
                 </div>
 
-                <div class="row">
-                    <div class="form-group col-sm">
-                        <label for="livesPoints">Elude kaotamine<span class="req"> *</span></label>
-                        <input id="livesPoints" class="form-control" type="number" v-model="mainPoints.livesPoints" value="0" min="0"
-                               required>
-                    </div>
+                <div class="form-check">
+                    <input id="lives" class="form-check-input" type="checkbox" v-model="current.requiements.lives">
+                    <label class="form-check-label" for="lives">Elude kaotamine</label>
                 </div>
 
-                <div class="row">
-                    <div class="form-group col-sm">
-                        <label for="restartPoints">Mängu läbikukkumine, punktid ja kordamine<span class="req"> *</span></label>
-                        <input id="restartPoints" class="form-control" type="number" v-model="mainPoints.restartPoints" value="0" min="0"
-                               required>
-                    </div>
+                <div class="form-check">
+                    <input id="restarting" class="form-check-input" type="checkbox" v-model="current.requiements.restarting">
+                    <label class="form-check-label" for="restarting">Mängu läbikukkumine, punktid ja kordamine</label>
                 </div>
 
-                <div class="row">
-                    <div class="form-group col-sm">
-                        <label for="animationPoints">Kasutaja tähelepanu juhtitakse animatsioonidega<span
-                                class="req"> *</span></label>
-                        <input id="animationPoints" class="form-control" type="number" v-model="mainPoints.animationPoints"
-                               value="0" min="0" required>
-                    </div>
+                <div class="form-check">
+                    <input id="animations" class="form-check-input" type="checkbox" v-model="current.requiements.animations">
+                    <label class="form-check-label" for="animations">Kasutaja tähelepanu juhtitakse animatsioonidega</label>
                 </div>
 
                 <div class="row">
                     <div class="col-sm">
-                        <h5>Baasülesande punkte kokku: {{mainPointsTotal}}</h5>
+                        <h5>{{isBaseDoneString}}</h5>
                     </div>
                 </div>
             </div>
@@ -130,54 +112,54 @@
             </div>
             <div class="box-with-margin">
                 <div class="form-check">
-                    <input id="goodDesign" class="form-check-input" type="checkbox" v-model="extraPoints.goodDesign">
+                    <input id="goodDesign" class="form-check-input" type="checkbox" v-model="current.extras.goodDesign">
                     <label class="form-check-label" for="goodDesign">Ilus kujundus</label>
                 </div>
 
                 <div class="form-check">
                     <input id="designSupportsTheme" class="form-check-input" type="checkbox"
-                           v-model="extraPoints.designSupportsTheme">
+                           v-model="current.extras.designSupportsTheme">
                     <label class="form-check-label" for="designSupportsTheme">Mängu kujundus toetab teemat</label>
                 </div>
 
                 <div class="form-check">
-                    <input id="goodAppearances" class="form-check-input" type="checkbox" v-model="extraPoints.goodAppearances">
+                    <input id="goodAppearances" class="form-check-input" type="checkbox" v-model="current.extras.goodAppearances">
                     <label class="form-check-label" for="goodAppearances">Head ilmumised</label>
                 </div>
 
                 <div class="form-check">
-                    <input id="goodSortingFeedback" class="form-check-input" type="checkbox" v-model="extraPoints.goodSortingFeedback">
+                    <input id="goodSortingFeedback" class="form-check-input" type="checkbox" v-model="current.extras.goodSortingFeedback">
                     <label class="form-check-label" for="goodSortingFeedback">Hea sortimise tagasiside</label>
                 </div>
 
                 <div class="form-check">
-                    <input id="goodExtraTaskEpisode" class="form-check-input" type="checkbox" v-model="extraPoints.goodExtraTaskEpisode">
+                    <input id="goodExtraTaskEpisode" class="form-check-input" type="checkbox" v-model="current.extras.goodExtraTaskEpisode">
                     <label class="form-check-label" for="goodExtraTaskEpisode">Hea lisaülesande "episood"</label>
                 </div>
 
                 <div class="form-check">
-                    <input id="goodFailureFeedback" class="form-check-input" type="checkbox" v-model="extraPoints.goodFailureFeedback">
+                    <input id="goodFailureFeedback" class="form-check-input" type="checkbox" v-model="current.extras.goodFailureFeedback">
                     <label class="form-check-label" for="goodFailureFeedback">Hea läbikukkumiste tagasiside</label>
                 </div>
 
                 <div class="form-check">
-                    <input id="feedbackSound" class="form-check-input" type="checkbox" v-model="extraPoints.feedbackSound">
+                    <input id="feedbackSound" class="form-check-input" type="checkbox" v-model="current.extras.feedbackSound">
                     <label class="form-check-label" for="feedbackSound">Heliline tagasiside</label>
                 </div>
 
                 <div class="form-check">
-                    <input id="learnability" class="form-check-input" type="checkbox" v-model="extraPoints.learnability">
+                    <input id="learnability" class="form-check-input" type="checkbox" v-model="current.extras.learnability">
                     <label class="form-check-label" for="learnability">Mängu õpitavus on hea</label>
                 </div>
 
                 <div class="form-check">
-                    <input id="dragAndDrop" class="form-check-input" type="checkbox" v-model="extraPoints.dragAndDrop">
+                    <input id="dragAndDrop" class="form-check-input" type="checkbox" v-model="current.extras.dragAndDrop">
                     <label class="form-check-label" for="dragAndDrop">Sorditavaid elemente saab lohistada
                         (<i>drag&drop</i>)</label>
                 </div>
 
                 <div class="form-check">
-                    <input id="responsiveDesign" class="form-check-input" type="checkbox" v-model="extraPoints.responsiveDesign">
+                    <input id="responsiveDesign" class="form-check-input" type="checkbox" v-model="current.extras.responsiveDesign">
                     <label class="form-check-label" for="responsiveDesign">Töötab ka mobiilil</label>
                 </div>
 
@@ -199,15 +181,15 @@
             </div>
             <div class="box-with-margin">
                 <div class="form-check col-sm">
-                    <input id="onTime" name="submissionSelection" v-model="submissionSelection" class="form-check-input" value="onTime" type="radio" required>
+                    <input id="onTime" name="submissionSelection" v-model="current.submitted" class="form-check-input" value="onTime" type="radio" required>
                     <label for="onTime">Õigeaegselt</label>
                 </div>
                 <div class="form-check col-sm">
-                    <input id="lateOneWeek" name="submissionSelection" v-model="submissionSelection" class="form-check-input" value="lateOneWeek" type="radio" required>
+                    <input id="lateOneWeek" name="submissionSelection" v-model="current.submitted" class="form-check-input" value="lateOneWeek" type="radio" required>
                     <label for="lateOneWeek">Hilinemisega 1 nädal</label>
                 </div>
                 <div class="form-check col-sm">
-                    <input id="lateForMore" name="submissionSelection" v-model="submissionSelection" class="form-check-input" value="lateForMore" type="radio" required>
+                    <input id="lateForMore" name="submissionSelection" v-model="current.submitted" class="form-check-input" value="lateForMore" type="radio" required>
                     <label for="lateForMore">Hilinemisega rohkem kui 1 nädal</label>
                 </div>
 
@@ -239,19 +221,19 @@
                 <tbody>
                 <tr>
                     <th scope="row">Üliõpilaskood 1</th>
-                    <td>{{studentCodeOne}}</td>
+                    <td>{{current.studentCodeOne}}</td>
                 </tr>
                 <tr>
                     <th scope="row">Üliõpilaskood 2</th>
-                    <td>{{studentCodeTwo}}</td>
+                    <td>{{current.studentCodeTwo}}</td>
                 </tr>
                 <tr>
                     <th scope="row">Dijkstra kasutajanimi</th>
-                    <td>{{dijkstraName}}</td>
+                    <td>{{current.dijkstraAddress}}</td>
                 </tr>
                 <tr>
                     <th scope="row">Baasülesande punktid</th>
-                    <td>{{mainPointsTotal}}</td>
+                    <td>{{isBaseDoneString}}</td>
                 </tr>
                 <tr>
                     <th scope="row">Lisapunktid</th>
