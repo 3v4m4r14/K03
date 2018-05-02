@@ -37,6 +37,10 @@ table {
     color: red;
 }
 
+.ok {
+    color: green;
+}
+
 .row {
     margin-bottom: 1em;
     margin-top: 1em;

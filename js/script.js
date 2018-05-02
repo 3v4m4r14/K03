@@ -54,7 +54,16 @@ var vm = new Vue({
             return true;
         },
         isBaseDoneString: function () {
-            return this.isBaseDone ? "Korras" : "Puudulik";
+            var baseStatus = $('#baseStatus');
+            if (this.isBaseDone) {
+                baseStatus.removeClass("req");
+                baseStatus.addClass("ok");
+                return "Korras";
+            } else {
+                baseStatus.removeClass("ok");
+                baseStatus.addClass("req");
+                return "Puudulik";
+            }
         },
         extraPointsTotal: function () {
             var total = 0;
