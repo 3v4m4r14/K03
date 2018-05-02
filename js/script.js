@@ -12,6 +12,7 @@ var vm = new Vue({
                 studentCodeOne: "155408IAPB",
                 studentCodeTwo: "155202IAPB",
                 dijkstraAddress: "evveit",
+                taskType: "regular",
                 requirements: {
                     waitingLine: true,
                     sorting: true,
@@ -54,7 +55,16 @@ var vm = new Vue({
             return true;
         },
         isBaseDoneString: function () {
-            return this.isBaseDone ? "Korras" : "Puudulik";
+            var baseStatus = $('#baseStatus');
+            if (this.isBaseDone) {
+                baseStatus.removeClass("req");
+                baseStatus.addClass("ok");
+                return "Korras";
+            } else {
+                baseStatus.removeClass("ok");
+                baseStatus.addClass("req");
+                return "Puudulik";
+            }
         },
         extraPointsTotal: function () {
             var total = 0;
@@ -83,6 +93,12 @@ var vm = new Vue({
         }, 
         address: function() {
             return "http://dijkstra.cs.ttu.ee/~" + this.current.dijkstraAddress + "/ui/t2/";
+        },
+        taskTypeIsRegular: function () {
+            return this.current.taskType === "regular";
+        },
+        taskTypeIsProject: function () {
+            return this.current.taskType === "project";
         }
     },
     methods: {}

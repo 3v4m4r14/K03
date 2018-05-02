@@ -59,7 +59,29 @@
 
     <hr>
 
-    <div id="basePoints">
+    <div id="taskType">
+        <form id="taskTypeForm">
+            <div class="box-header">
+                <h3>Töö tüüp</h3>
+            </div>
+            <div class="box-with-margin">
+                <div class="form-check col-sm">
+                    <input id="regularType" name="typeSelection" v-model="current.taskType" class="form-check-input"
+                           value="regular" type="radio" required>
+                    <label for="regularType">Tüüpülesanne</label>
+                </div>
+                <div class="form-check col-sm">
+                    <input id="projectType" name="typeSelection" v-model="current.taskType"
+                           class="form-check-input" value="project" type="radio" required>
+                    <label for="projectType">Kokkuleppeline projekt</label>
+                </div>
+            </div>
+        </form>
+        <hr>
+    </div>
+
+
+    <div id="basePoints" v-if="taskTypeIsRegular">
         <form id="basePointsForm">
             <div class="box-header">
                 <h3>Baasülesanded</h3>
@@ -78,8 +100,8 @@
                 </div>
 
                 <div class="form-check">
-                    <input id="extraTask" class="form-check-input" type="checkbox" 
-                            v-model="current.requirements.extraTask">
+                    <input id="extraTask" class="form-check-input" type="checkbox"
+                           v-model="current.requirements.extraTask">
                     <label class="form-check-label" for="extraTask">Tähtajaline lisaülesanne</label>
                 </div>
 
@@ -89,15 +111,15 @@
                 </div>
 
                 <div class="form-check">
-                    <input id="restarting" class="form-check-input" type="checkbox" 
-                            v-model="current.requirements.restarting">
+                    <input id="restarting" class="form-check-input" type="checkbox"
+                           v-model="current.requirements.restarting">
                     <label class="form-check-label" for="restarting">Mängu läbikukkumine, punktid ja kordamine</label>
                 </div>
 
                 <div class="form-check">
-                    <input id="animations" class="form-check-input" type="checkbox" 
-                        v-model="current.requirements.animations">
-                    <label class="form-check-label" for="animations">Kasutaja tähelepanu juhtitakse 
+                    <input id="animations" class="form-check-input" type="checkbox"
+                           v-model="current.requirements.animations">
+                    <label class="form-check-label" for="animations">Kasutaja tähelepanu juhtitakse
                         animatsioonidega</label>
                 </div>
 
@@ -113,16 +135,16 @@
 
                 <div class="row">
                     <div class="col-sm">
-                        <h5>{{isBaseDoneString}}</h5>
+                        <h5 id="baseStatus" class="req">{{isBaseDoneString}}</h5>
                     </div>
                 </div>
             </div>
         </form>
+        <hr>
     </div>
 
-    <hr>
 
-    <div id="extraPoints">
+    <div id="extraPoints" v-if="taskTypeIsRegular">
         <form id="extraPointsForm">
             <div class="box-header">
                 <h3>Lisad</h3>
@@ -214,9 +236,9 @@
                 </div>
             </div>
         </form>
+        <hr>
     </div>
 
-    <hr>
 
     <div id="latePenalty">
         <form id="latePenaltyForm">
@@ -262,14 +284,6 @@
         </div>
         <div class="box-with-margin">
             <table class="table table-striped">
-                <!--<thead>
-                <tr>
-                    <th scope="col">Üliõpilaskood 1</th>
-                    <th scope="col">Üliõpilaskood 2</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Handle</th>
-                </tr>
-                </thead>-->
                 <tbody>
                 <tr>
                     <th scope="row">Üliõpilaskood 1</th>
@@ -281,13 +295,15 @@
                 </tr>
                 <tr>
                     <th scope="row">Dijkstra aadress</th>
-                    <td><a v-bind:href="address" target="_blank">{{address}}</a></td>
+                    <td style="word-wrap: break-word;min-width: 160px;max-width: 160px;"><a v-bind:href="address"
+                                                                                            target="_blank">{{address}}</a>
+                    </td>
                 </tr>
-                <tr>
+                <tr v-if="taskTypeIsRegular">
                     <th scope="row">Baasülesande punktid</th>
                     <td>{{isBaseDoneString}}</td>
                 </tr>
-                <tr>
+                <tr v-if="taskTypeIsRegular">
                     <th scope="row">Lisapunktid</th>
                     <td>{{extraPointsTotal}}</td>
                 </tr>
@@ -297,10 +313,14 @@
                 </tr>
                 <tr class="bg-primary">
                     <th scope="row">Punktid kokku</th>
-                    <td>{{pointsTotal}}</td>
+                    <td>{{pointsTotal}} / 20</td>
                 </tr>
                 </tbody>
             </table>
+
+            <a href="." class="btn btn-lg btn-success" type="button">
+                Salvesta
+            </a>
         </div>
     </div>
 
@@ -310,7 +330,7 @@
             <div class="bg-dark p-4">
                 <div class="row">
                     <div class="col text-white"><b>Punkte kokku:</b></div>
-                    <div class="col text-white"><b>{{pointsTotal}}</b></div>
+                    <div class="col text-white"><b>{{pointsTotal}} / 20</b></div>
                 </div>
 
                 <div class="text-white">{{current.studentCodeOne}}</div>
