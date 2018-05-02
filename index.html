@@ -27,311 +27,312 @@
     <h1 id="pageTitle">Kodutöö 2 hindamine</h1>
     <hr style="margin-top: 0;">
 
-    <div id="students">
-        <form id="studentsForm">
-            <div class="box-header">
-                <h3>Tudengid</h3>
-            </div>
-            <div class="box-with-margin">
-                <div class="row">
-                    <div class="form-group col-sm">
-                        <label for="studentCodeOne">Üliõpilaskood 1<span class="req"> *</span></label>
-                        <input id="studentCodeOne" class="form-control" v-model="current.studentCodeOne" type="text"
-                               required>
+    <div class="row">
+        <div id="students" class="col-sm-12 col-lg-6">
+            <form id="studentsForm">
+                <div class="box-with-margin">
+                    <h3>Tudengid</h3>
+                    <div class="row">
+                        <div class="form-group col-sm">
+                            <label for="studentCodeOne">Üliõpilaskood 1<span class="req"> *</span></label>
+                            <input id="studentCodeOne" class="form-control" v-model="current.studentCodeOne" type="text"
+                                   required>
+                        </div>
+
+                        <div class="form-group col-sm">
+                            <label for="studentCodeTwo">Üliõpilaskood 2</label>
+                            <input id="studentCodeTwo" class="form-control" v-model="current.studentCodeTwo"
+                                   type="text">
+                        </div>
                     </div>
 
-                    <div class="form-group col-sm">
-                        <label for="studentCodeTwo">Üliõpilaskood 2</label>
-                        <input id="studentCodeTwo" class="form-control" v-model="current.studentCodeTwo" type="text">
+                    <div class="row">
+                        <div class="form-group col-sm-6">
+                            <label for="dijkstraAddress">Uni-ID<span class="req"> *</span></label>
+                            <input id="dijkstraAddress" class="form-control" v-model="current.dijkstraAddress"
+                                   type="text"
+                                   required>
+                        </div>
                     </div>
                 </div>
-
-                <div class="row">
-                    <div class="form-group col-sm-6">
-                        <label for="dijkstraAddress">Uni-ID<span class="req"> *</span></label>
-                        <input id="dijkstraAddress" class="form-control" v-model="current.dijkstraAddress" type="text"
-                               required>
-                    </div>
-                </div>
-            </div>
-        </form>
-    </div>
-
-    <hr>
-
-    <div id="taskType">
-        <form id="taskTypeForm">
-            <div class="box-header">
-                <h3>Töö tüüp</h3>
-            </div>
-            <div class="box-with-margin">
-                <div class="form-check col-sm">
-                    <input id="regularType" name="typeSelection" v-model="current.taskType" class="form-check-input"
-                           value="regular" type="radio" required>
-                    <label for="regularType">Tüüpülesanne</label>
-                </div>
-                <div class="form-check col-sm">
-                    <input id="projectType" name="typeSelection" v-model="current.taskType"
-                           class="form-check-input" value="project" type="radio" required>
-                    <label for="projectType">Kokkuleppeline projekt</label>
-                </div>
-            </div>
-        </form>
-        <hr>
-    </div>
-
-
-    <div id="basePoints" v-if="taskTypeIsRegular">
-        <form id="basePointsForm">
-            <div class="box-header">
-                <h3>Baasülesanded</h3>
-            </div>
-            <div class="box-with-margin">
-                <div class="form-check">
-                    <input id="waitingLine" class="form-check-input" type="checkbox"
-                           v-model="current.requirements.waitingLine">
-                    <label class="form-check-label" for="waitingLine">Ootejärjekord</label>
-                </div>
-
-                <div class="form-check">
-                    <input id="sorting" class="form-check-input" type="checkbox"
-                           v-model="current.requirements.sorting">
-                    <label class="form-check-label" for="sorting">Sortimine (lohistamine või klõps)</label>
-                </div>
-
-                <div class="form-check">
-                    <input id="extraTask" class="form-check-input" type="checkbox"
-                           v-model="current.requirements.extraTask">
-                    <label class="form-check-label" for="extraTask">Tähtajaline lisaülesanne</label>
-                </div>
-
-                <div class="form-check">
-                    <input id="lives" class="form-check-input" type="checkbox" v-model="current.requirements.lives">
-                    <label class="form-check-label" for="lives">Elude kaotamine</label>
-                </div>
-
-                <div class="form-check">
-                    <input id="restarting" class="form-check-input" type="checkbox"
-                           v-model="current.requirements.restarting">
-                    <label class="form-check-label" for="restarting">Mängu läbikukkumine, punktid ja kordamine</label>
-                </div>
-
-                <div class="form-check">
-                    <input id="animations" class="form-check-input" type="checkbox"
-                           v-model="current.requirements.animations">
-                    <label class="form-check-label" for="animations">Kasutaja tähelepanu juhtitakse
-                        animatsioonidega</label>
-                </div>
-
-                <hr>
-
-                <div class="form-check">
-                    <input id="alternativeRequirements" class="form-check-input" type="checkbox" v-model="current.alternativeRequirements">
-                    <label class="form-check-label" for="alternativeRequirements">Alternatiivne baasülesande lahendus</label>
-                </div>
-
-                <hr>
-
-                <div class="form-group">
-                    <label for="requirementsComment">Kommentaar:</label>
-                    <textarea class="form-control" rows="2" id="requirementsComment" v-model="current.requirementsComment"></textarea>
-                </div>
-
-                <div class="row">
-                    <div class="col-sm">
-                        <h5 id="baseStatus" class="req">{{isBaseDoneString}}</h5>
-                    </div>
-                </div>
-            </div>
-        </form>
-        <hr>
-    </div>
-
-
-    <div id="extraPoints" v-if="taskTypeIsRegular">
-        <form id="extraPointsForm">
-            <div class="box-header">
-                <h3>Lisad</h3>
-            </div>
-            <div class="box-with-margin">
-                <div class="form-check">
-                    <input id="goodDesign" class="form-check-input" type="checkbox" v-model="current.extras.goodDesign">
-                    <label class="form-check-label" for="goodDesign">Ilus kujundus</label>
-                </div>
-
-                <div class="form-check">
-                    <input id="designSupportsTheme" class="form-check-input" type="checkbox"
-                           v-model="current.extras.designSupportsTheme">
-                    <label class="form-check-label" for="designSupportsTheme">Mängu kujundus toetab teemat</label>
-                </div>
-
-                <div class="form-check">
-                    <input id="goodAppearances" class="form-check-input" type="checkbox"
-                           v-model="current.extras.goodAppearances">
-                    <label class="form-check-label" for="goodAppearances">Head ilmumised</label>
-                </div>
-
-                <div class="form-check">
-                    <input id="goodSortingFeedback" class="form-check-input" type="checkbox"
-                           v-model="current.extras.goodSortingFeedback">
-                    <label class="form-check-label" for="goodSortingFeedback">Hea sortimise tagasiside</label>
-                </div>
-
-                <div class="form-check">
-                    <input id="goodExtraTaskEpisode" class="form-check-input" type="checkbox"
-                           v-model="current.extras.goodExtraTaskEpisode">
-                    <label class="form-check-label" for="goodExtraTaskEpisode">Hea lisaülesande "episood"</label>
-                </div>
-
-                <div class="form-check">
-                    <input id="goodFailureFeedback" class="form-check-input" type="checkbox"
-                           v-model="current.extras.goodFailureFeedback">
-                    <label class="form-check-label" for="goodFailureFeedback">Hea läbikukkumiste tagasiside</label>
-                </div>
-
-                <div class="form-check">
-                    <input id="feedbackSound" class="form-check-input" type="checkbox"
-                           v-model="current.extras.feedbackSound">
-                    <label class="form-check-label" for="feedbackSound">Heliline tagasiside</label>
-                </div>
-
-                <div class="form-check">
-                    <input id="learnability" class="form-check-input" type="checkbox"
-                           v-model="current.extras.learnability">
-                    <label class="form-check-label" for="learnability">Mängu õpitavus on hea</label>
-                </div>
-
-                <div class="form-check">
-                    <input id="dragAndDrop" class="form-check-input" type="checkbox"
-                           v-model="current.extras.dragAndDrop">
-                    <label class="form-check-label" for="dragAndDrop">Sorditavaid elemente saab lohistada
-                        (<i>drag&drop</i>)</label>
-                </div>
-
-                <div class="form-check">
-                    <input id="responsiveDesign" class="form-check-input" type="checkbox"
-                           v-model="current.extras.responsiveDesign">
-                    <label class="form-check-label" for="responsiveDesign">Töötab ka mobiilil</label>
-                </div>
-
-                <hr>
-
-                <div class="row">
-                    <div class="form-group col-sm">
-                        <label for="alternativeExtraPoints">Muud lisapunktid</label>
-                        <input id="alternativeExtraPoints" class="form-control" type="number" v-model="current.extraExtraPoints" min="0" required>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="form-group col-sm">
-                        <label for="extraPenalty">Karistuspunktid</label>
-                        <input id="extraPenalty" class="form-control" type="number" v-model="current.extraPenalty" required>
-                    </div>
-                </div>
-
-                <hr>
-
-                <div class="form-group">
-                    <label for="extrasComment">Kommentaar:</label>
-                    <textarea class="form-control" rows="2" id="extrasComment" v-model="current.extrasComment"></textarea>
-                </div>
-
-                <div class="row">
-                    <div class="col-sm">
-                        <h5>Lisapunkte kokku: {{extraPointsTotal}}</h5>
-                    </div>
-                </div>
-            </div>
-        </form>
-        <hr>
-    </div>
-
-
-    <div id="latePenalty">
-        <form id="latePenaltyForm">
-            <div class="box-header">
-                <h3>Esitatud</h3>
-            </div>
-            <div class="box-with-margin">
-                <div class="form-check col-sm">
-                    <input id="onTime" name="submissionSelection" v-model="current.submitted" class="form-check-input"
-                           value="onTime" type="radio" required>
-                    <label for="onTime">Õigeaegselt</label>
-                </div>
-                <div class="form-check col-sm">
-                    <input id="lateOneWeek" name="submissionSelection" v-model="current.submitted"
-                           class="form-check-input" value="lateOneWeek" type="radio" required>
-                    <label for="lateOneWeek">Hilinemisega 1 nädal</label>
-                </div>
-                <div class="form-check col-sm">
-                    <input id="lateForMore" name="submissionSelection" v-model="current.submitted"
-                           class="form-check-input" value="lateForMore" type="radio" required>
-                    <label for="lateForMore">Hilinemisega rohkem kui 1 nädal</label>
-                </div>
-
-                <hr>
-
-                <div class="form-group">
-                    <label for="submissionComment">Kommentaar:</label>
-                    <textarea class="form-control" rows="2" id="submissionComment" v-model="current.submittedComment"></textarea>
-                </div>
-
-                <div class="row">
-                    <div class="col-sm">
-                        <h5>Trahvipunkte: {{latePenaltyTotal}}</h5>
-                    </div>
-                </div>
-            </div>
-        </form>
-    </div>
-
-    <hr>
-
-    <div id="data">
-        <div class="box-header">
-            <h3>Tulemus</h3>
+            </form>
         </div>
-        <div class="box-with-margin">
-            <table class="table table-striped">
-                <tbody>
-                <tr>
-                    <th scope="row">Üliõpilaskood 1</th>
-                    <td>{{current.studentCodeOne}}</td>
-                </tr>
-                <tr>
-                    <th scope="row">Üliõpilaskood 2</th>
-                    <td>{{current.studentCodeTwo}}</td>
-                </tr>
-                <tr>
-                    <th scope="row">Dijkstra aadress</th>
-                    <td style="word-wrap: break-word;min-width: 160px;max-width: 160px;"><a v-bind:href="address"
-                                                                                            target="_blank">{{address}}</a>
-                    </td>
-                </tr>
-                <tr v-if="taskTypeIsRegular">
-                    <th scope="row">Baasülesande punktid</th>
-                    <td>{{isBaseDoneString}}</td>
-                </tr>
-                <tr v-if="taskTypeIsRegular">
-                    <th scope="row">Lisapunktid</th>
-                    <td>{{extraPointsTotal}}</td>
-                </tr>
-                <tr>
-                    <th scope="row">Trahvipunktid hilinemise eest</th>
-                    <td>{{latePenaltyTotal}}</td>
-                </tr>
-                <tr class="bg-primary">
-                    <th scope="row">Punktid kokku</th>
-                    <td>{{pointsTotal}} / 20</td>
-                </tr>
-                </tbody>
-            </table>
 
-            <a href="." class="btn btn-lg btn-success" type="button">
-                Salvesta
-            </a>
+        <div id="taskType" class="col-sm-12 col-lg-6">
+            <form id="taskTypeForm">
+                <div class="box-with-margin">
+                    <h3>Töö tüüp</h3>
+                    <div class="form-check col-sm">
+                        <input id="regularType" name="typeSelection" v-model="current.taskType" class="form-check-input"
+                               value="regular" type="radio" required>
+                        <label for="regularType">Tüüpülesanne</label>
+                    </div>
+                    <div class="form-check col-sm">
+                        <input id="projectType" name="typeSelection" v-model="current.taskType"
+                               class="form-check-input" value="project" type="radio" required>
+                        <label for="projectType">Kokkuleppeline projekt</label>
+                    </div>
+                </div>
+            </form>
         </div>
+    </div>
+
+    <div class="row">
+        <div id="basePoints" class="col-sm-12 col-lg-6" v-if="taskTypeIsRegular">
+            <form id="basePointsForm">
+                <div class="box-with-margin">
+                    <h3>Baasülesanded</h3>
+                    <div class="form-check">
+                        <input id="waitingLine" class="form-check-input" type="checkbox"
+                               v-model="current.requirements.waitingLine">
+                        <label class="form-check-label" for="waitingLine">Ootejärjekord</label>
+                    </div>
+
+                    <div class="form-check">
+                        <input id="sorting" class="form-check-input" type="checkbox"
+                               v-model="current.requirements.sorting">
+                        <label class="form-check-label" for="sorting">Sortimine (lohistamine või klõps)</label>
+                    </div>
+
+                    <div class="form-check">
+                        <input id="extraTask" class="form-check-input" type="checkbox"
+                               v-model="current.requirements.extraTask">
+                        <label class="form-check-label" for="extraTask">Tähtajaline lisaülesanne</label>
+                    </div>
+
+                    <div class="form-check">
+                        <input id="lives" class="form-check-input" type="checkbox" v-model="current.requirements.lives">
+                        <label class="form-check-label" for="lives">Elude kaotamine</label>
+                    </div>
+
+                    <div class="form-check">
+                        <input id="restarting" class="form-check-input" type="checkbox"
+                               v-model="current.requirements.restarting">
+                        <label class="form-check-label" for="restarting">Mängu läbikukkumine, punktid ja
+                            kordamine</label>
+                    </div>
+
+                    <div class="form-check">
+                        <input id="animations" class="form-check-input" type="checkbox"
+                               v-model="current.requirements.animations">
+                        <label class="form-check-label" for="animations">Kasutaja tähelepanu juhtitakse
+                            animatsioonidega</label>
+                    </div>
+
+                    <hr>
+
+                    <div class="form-check">
+                        <input id="alternativeRequirements" class="form-check-input" type="checkbox"
+                               v-model="current.alternativeRequirements">
+                        <label class="form-check-label" for="alternativeRequirements">Alternatiivne baasülesande
+                            lahendus</label>
+                    </div>
+
+                    <hr>
+
+                    <div class="form-group">
+                        <label for="requirementsComment">Kommentaar:</label>
+                        <textarea class="form-control" rows="2" id="requirementsComment"
+                                  v-model="current.requirementsComment"></textarea>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm">
+                            <h5 id="baseStatus" class="req">{{isBaseDoneString}}</h5>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+
+        <div id="extraPoints" class="col-sm-12 col-lg-6" v-if="taskTypeIsRegular">
+            <form id="extraPointsForm">
+                <div class="box-with-margin">
+                    <h3>Lisad</h3>
+                    <div class="form-check">
+                        <input id="goodDesign" class="form-check-input" type="checkbox"
+                               v-model="current.extras.goodDesign">
+                        <label class="form-check-label" for="goodDesign">Ilus kujundus</label>
+                    </div>
+
+                    <div class="form-check">
+                        <input id="designSupportsTheme" class="form-check-input" type="checkbox"
+                               v-model="current.extras.designSupportsTheme">
+                        <label class="form-check-label" for="designSupportsTheme">Mängu kujundus toetab teemat</label>
+                    </div>
+
+                    <div class="form-check">
+                        <input id="goodAppearances" class="form-check-input" type="checkbox"
+                               v-model="current.extras.goodAppearances">
+                        <label class="form-check-label" for="goodAppearances">Head ilmumised</label>
+                    </div>
+
+                    <div class="form-check">
+                        <input id="goodSortingFeedback" class="form-check-input" type="checkbox"
+                               v-model="current.extras.goodSortingFeedback">
+                        <label class="form-check-label" for="goodSortingFeedback">Hea sortimise tagasiside</label>
+                    </div>
+
+                    <div class="form-check">
+                        <input id="goodExtraTaskEpisode" class="form-check-input" type="checkbox"
+                               v-model="current.extras.goodExtraTaskEpisode">
+                        <label class="form-check-label" for="goodExtraTaskEpisode">Hea lisaülesande "episood"</label>
+                    </div>
+
+                    <div class="form-check">
+                        <input id="goodFailureFeedback" class="form-check-input" type="checkbox"
+                               v-model="current.extras.goodFailureFeedback">
+                        <label class="form-check-label" for="goodFailureFeedback">Hea läbikukkumiste tagasiside</label>
+                    </div>
+
+                    <div class="form-check">
+                        <input id="feedbackSound" class="form-check-input" type="checkbox"
+                               v-model="current.extras.feedbackSound">
+                        <label class="form-check-label" for="feedbackSound">Heliline tagasiside</label>
+                    </div>
+
+                    <div class="form-check">
+                        <input id="learnability" class="form-check-input" type="checkbox"
+                               v-model="current.extras.learnability">
+                        <label class="form-check-label" for="learnability">Mängu õpitavus on hea</label>
+                    </div>
+
+                    <div class="form-check">
+                        <input id="dragAndDrop" class="form-check-input" type="checkbox"
+                               v-model="current.extras.dragAndDrop">
+                        <label class="form-check-label" for="dragAndDrop">Sorditavaid elemente saab lohistada
+                            (<i>drag&drop</i>)</label>
+                    </div>
+
+                    <div class="form-check">
+                        <input id="responsiveDesign" class="form-check-input" type="checkbox"
+                               v-model="current.extras.responsiveDesign">
+                        <label class="form-check-label" for="responsiveDesign">Töötab ka mobiilil</label>
+                    </div>
+
+                    <hr>
+
+                    <div class="row">
+                        <div class="form-group col-sm">
+                            <label for="alternativeExtraPoints">Muud lisapunktid</label>
+                            <input id="alternativeExtraPoints" class="form-control" type="number"
+                                   v-model="current.extraExtraPoints" min="0" required>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-sm">
+                            <label for="extraPenalty">Karistuspunktid</label>
+                            <input id="extraPenalty" class="form-control" type="number" v-model="current.extraPenalty"
+                                   required>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="form-group">
+                        <label for="extrasComment">Kommentaar:</label>
+                        <textarea class="form-control" rows="2" id="extrasComment"
+                                  v-model="current.extrasComment"></textarea>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm">
+                            <h5>Lisapunkte kokku: {{extraPointsTotal}}</h5>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div id="latePenalty" class="col-sm-12 col-lg-6">
+            <form id="latePenaltyForm">
+                <div class="box-with-margin">
+                    <h3>Esitatud</h3>
+                    <div class="form-check col-sm">
+                        <input id="onTime" name="submissionSelection" v-model="current.submitted"
+                               class="form-check-input"
+                               value="onTime" type="radio" required>
+                        <label for="onTime">Õigeaegselt</label>
+                    </div>
+                    <div class="form-check col-sm">
+                        <input id="lateOneWeek" name="submissionSelection" v-model="current.submitted"
+                               class="form-check-input" value="lateOneWeek" type="radio" required>
+                        <label for="lateOneWeek">Hilinemisega 1 nädal</label>
+                    </div>
+                    <div class="form-check col-sm">
+                        <input id="lateForMore" name="submissionSelection" v-model="current.submitted"
+                               class="form-check-input" value="lateForMore" type="radio" required>
+                        <label for="lateForMore">Hilinemisega rohkem kui 1 nädal</label>
+                    </div>
+
+                    <hr>
+
+                    <div class="form-group">
+                        <label for="submissionComment">Kommentaar:</label>
+                        <textarea class="form-control" rows="2" id="submissionComment"
+                                  v-model="current.submittedComment"></textarea>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm">
+                            <h5>Trahvipunkte: {{latePenaltyTotal}}</h5>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <hr>
+
+        <div id="data" class="col-sm-12 col-lg-6">
+            <div class="box-with-margin">
+                <h3>Tulemus: {{pointsTotal}}p / 20p</h3>
+                <table class="table table-striped">
+                    <tbody>
+                    <tr>
+                        <th scope="row">Üliõpilaskood 1</th>
+                        <td>{{current.studentCodeOne}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Üliõpilaskood 2</th>
+                        <td>{{current.studentCodeTwo}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Dijkstra aadress</th>
+                        <td style="word-wrap: break-word;min-width: 160px;max-width: 160px;"><a v-bind:href="address"
+                                                                                                target="_blank">{{address}}</a>
+                        </td>
+                    </tr>
+                    <tr v-if="taskTypeIsRegular">
+                        <th scope="row">Baasülesande punktid</th>
+                        <td>{{isBaseDoneString}}</td>
+                    </tr>
+                    <tr v-if="taskTypeIsRegular">
+                        <th scope="row">Lisapunktid</th>
+                        <td>{{extraPointsTotal}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Trahvipunktid hilinemise eest</th>
+                        <td>{{latePenaltyTotal}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Kokku</th>
+                        <td>{{pointsTotal}} / 20</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <a href="." class="btn btn-lg btn-success" type="button">
+                    Salvesta
+                </a>
+            </div>
+        </div>
+
     </div>
 
 

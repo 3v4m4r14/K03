@@ -22,6 +22,10 @@ table {
     table-layout: fixed;
 }
 
+h3 {
+    margin-bottom: 0.7em;
+}
+
 .wrapped {
     white-space: pre;           /* CSS 2.0 */
     white-space: pre-wrap;      /* CSS 2.1 */
