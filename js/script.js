@@ -79,6 +79,9 @@ var vm = new Vue({
         pointsTotal: function () {
             if (!this.isBaseDone) return 0;
             return 10 + this.extraPointsTotal + this.current.extraPenalty + this.latePenaltyTotal;
+        }, 
+        address: function() {
+            return "http://dijkstra.cs.ttu.ee/~" + this.current.dijkstraAddress + "/ui/t2/";
         }
     },
     methods: {}

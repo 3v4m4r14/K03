@@ -47,7 +47,7 @@
 
                 <div class="row">
                     <div class="form-group col-sm-6">
-                        <label for="dijkstraAddress">Dijkstra kasutajanimi<span class="req"> *</span></label>
+                        <label for="dijkstraAddress">Uni-ID<span class="req"> *</span></label>
                         <input id="dijkstraAddress" class="form-control" v-model="current.dijkstraAddress" type="text" required>
                     </div>
                 </div>
@@ -228,8 +228,8 @@
                     <td>{{current.studentCodeTwo}}</td>
                 </tr>
                 <tr>
-                    <th scope="row">Dijkstra kasutajanimi</th>
-                    <td>{{current.dijkstraAddress}}</td>
+                    <th scope="row">Dijkstra address</th>
+                    <td><a v-bind:href="address" target="_blank">{{address}}</a></td>
                 </tr>
                 <tr>
                     <th scope="row">Baasülesande punktid</th>
