@@ -6,6 +6,10 @@ body {
     background-color: #fcfcfc;
 }
 
+main {
+    margin-bottom: 4em;
+}
+
 .half-divider {
     width: 50%;
 }
