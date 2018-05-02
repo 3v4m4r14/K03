@@ -265,11 +265,11 @@
                                                                                             target="_blank">{{address}}</a>
                     </td>
                 </tr>
-                <tr>
+                <tr v-if="taskTypeIsRegular">
                     <th scope="row">Baasülesande punktid</th>
                     <td>{{isBaseDoneString}}</td>
                 </tr>
-                <tr>
+                <tr v-if="taskTypeIsRegular">
                     <th scope="row">Lisapunktid</th>
                     <td>{{extraPointsTotal}}</td>
                 </tr>
