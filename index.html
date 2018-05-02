@@ -28,7 +28,7 @@
     <hr style="margin-top: 0;">
 
     <div class="row">
-        <div id="students" class="col-sm-12 col-lg-6">
+        <div id="students" class="col-sm-12 col-lg-6 order-1">
             <form id="studentsForm">
                 <div class="box-with-margin">
                     <h3>Tudengid</h3>
@@ -58,7 +58,7 @@
             </form>
         </div>
 
-        <div id="taskType" class="col-sm-12 col-lg-6">
+        <div id="taskType" class="col-sm-12 col-lg-6 order-2">
             <form id="taskTypeForm">
                 <div class="box-with-margin">
                     <h3>Töö tüüp</h3>
@@ -77,8 +77,10 @@
         </div>
     </div>
 
+    <hr>
+
     <div class="row">
-        <div id="basePoints" class="col-sm-12 col-lg-6" v-if="taskTypeIsRegular">
+        <div id="basePoints" class="col-sm-12 col-lg-6 order-3" v-if="taskTypeIsRegular">
             <form id="basePointsForm">
                 <div class="box-with-margin">
                     <h3>Baasülesanded</h3>
@@ -146,7 +148,7 @@
         </div>
 
 
-        <div id="extraPoints" class="col-sm-12 col-lg-6" v-if="taskTypeIsRegular">
+        <div id="extraPoints" class="col-sm-12 col-lg-6 order-4" v-if="taskTypeIsRegular">
             <form id="extraPointsForm">
                 <div class="box-with-margin">
                     <h3>Lisad</h3>
@@ -247,9 +249,10 @@
         </div>
     </div>
 
+    <hr>
 
     <div class="row">
-        <div id="latePenalty" class="col-sm-12 col-lg-6">
+        <div id="latePenalty" class="col-sm-12 col-lg-6 order-5">
             <form id="latePenaltyForm">
                 <div class="box-with-margin">
                     <h3>Esitatud</h3>
@@ -289,7 +292,7 @@
 
         <hr>
 
-        <div id="data" class="col-sm-12 col-lg-6">
+        <div id="data" class="col-sm-12 col-lg-6 order-6">
             <div class="box-with-margin">
                 <h3>Tulemus: {{pointsTotal}}p / 20p</h3>
                 <table class="table table-striped">
