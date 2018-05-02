@@ -12,7 +12,7 @@ var vm = new Vue({
                 studentCodeOne: "155408IAPB",
                 studentCodeTwo: "155202IAPB", 
                 dijkstraAddress: "evveit",
-                requiements: {
+                requirements: {
                     waitingLine: false,
                     sorting: false,
                     extraTask: false,
@@ -21,7 +21,7 @@ var vm = new Vue({
                     animations: false
                 }, 
                 alternativeRequirements: false,
-                requiementsComment: "",
+                requirementsComment: "",
                 extras: {
                     goodDesign: false,
                     designSupportsTheme: false,
@@ -47,9 +47,9 @@ var vm = new Vue({
             return this.works[this.currentIndex];
         },
         isBaseDone: function () {
-            if (this.current.requiements.alternativeRequirements) return true; 
-            for (key in this.current.requiements) {
-                if (!this.current.requiements[key]) return false;
+            if (this.current.requirements.alternativeRequirements) return true;
+            for (key in this.current.requirements) {
+                if (!this.current.requirements[key]) return false;
             }
             return true;
         },
