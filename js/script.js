@@ -10,8 +10,8 @@ var vm = new Vue({
             works: [
             {
                 studentCodeOne: "155408IAPB",
-                studentCodeTwo: "155202IAPB", 
-                dijkstraAddress: "CLICKABLE AND VERY LONNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNG ADDRESS", 
+                studentCodeTwo: "155202IAPB",
+                dijkstraAddress: "evveit",
                 requirements: {
                     waitingLine: true,
                     sorting: true,
@@ -32,7 +32,7 @@ var vm = new Vue({
                     feedbackSound: false,
                     learnability: false,
                     dragAndDrop: false,
-                    responsiveDesign: false,
+                    responsiveDesign: false
                 }, 
                 extraExtraPoints: 0,
                 extraPenalty: 0, 
