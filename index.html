@@ -123,14 +123,18 @@
                         animatsioonidega</label>
                 </div>
 
-                <div class="form-group">
-                    <label for="requirementsComment">Kommentaar:</label>
-                    <textarea class="form-control" rows="2" id="requirementsComment" v-model="current.requirementsComment"></textarea>
-                </div>
+                <hr>
 
                 <div class="form-check">
                     <input id="alternativeRequirements" class="form-check-input" type="checkbox" v-model="current.alternativeRequirements">
-                    <label class="form-check-label" for="alternativeRequirements">Alternatiivne baas lahendus</label>
+                    <label class="form-check-label" for="alternativeRequirements">Alternatiivne baasülesande lahendus</label>
+                </div>
+
+                <hr>
+
+                <div class="form-group">
+                    <label for="requirementsComment">Kommentaar:</label>
+                    <textarea class="form-control" rows="2" id="requirementsComment" v-model="current.requirementsComment"></textarea>
                 </div>
 
                 <div class="row">
@@ -210,23 +214,27 @@
                     <label class="form-check-label" for="responsiveDesign">Töötab ka mobiilil</label>
                 </div>
 
-                <div class="form-group">
-                    <label for="extrasComment">Kommentaar:</label>
-                    <textarea class="form-control" rows="2" id="extrasComment" v-model="current.extrasComment"></textarea>
-                </div>
+                <hr>
 
                 <div class="row">
                     <div class="form-group col-sm">
-                        <label for="alternativeExtraPoints">Alternatiivsed lisa punktid</label>
+                        <label for="alternativeExtraPoints">Muud lisapunktid</label>
                         <input id="alternativeExtraPoints" class="form-control" type="number" v-model="current.extraExtraPoints" min="0" required>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="form-group col-sm">
-                        <label for="extraPenalty">Karistus punktid</label>
+                        <label for="extraPenalty">Karistuspunktid</label>
                         <input id="extraPenalty" class="form-control" type="number" v-model="current.extraPenalty" required>
                     </div>
+                </div>
+
+                <hr>
+
+                <div class="form-group">
+                    <label for="extrasComment">Kommentaar:</label>
+                    <textarea class="form-control" rows="2" id="extrasComment" v-model="current.extrasComment"></textarea>
                 </div>
 
                 <div class="row">
@@ -261,6 +269,8 @@
                            class="form-check-input" value="lateForMore" type="radio" required>
                     <label for="lateForMore">Hilinemisega rohkem kui 1 nädal</label>
                 </div>
+
+                <hr>
 
                 <div class="form-group">
                     <label for="submissionComment">Kommentaar:</label>
