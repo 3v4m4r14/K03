@@ -12,16 +12,16 @@ var vm = new Vue({
                 studentCodeOne: "155408IAPB",
                 studentCodeTwo: "155202IAPB", 
                 dijkstraAddress: "CLICKABLE AND VERY LONNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNG ADDRESS", 
-                requiements: {
-                    waitingLine: false,
-                    sorting: false,
-                    extraTask: false,
+                requirements: {
+                    waitingLine: true,
+                    sorting: true,
+                    extraTask: true,
                     lives: false,
-                    restarting: false,
-                    animations: false
+                    restarting: true,
+                    animations: true
                 }, 
                 alternativeRequirements: false,
-                requiementsComment: "",
+                requirementsComment: "Elud puudu.",
                 extras: {
                     goodDesign: false,
                     designSupportsTheme: false,
@@ -36,9 +36,9 @@ var vm = new Vue({
                 }, 
                 extraExtraPoints: 0,
                 extraPenalty: 0, 
-                extrasComments: "", 
+                extrasComment: "", 
                 submitted: "onTime", 
-                submittedComment: ""
+                submittedComment: "1 nädal pikendust."
             }]
         }
     },
@@ -47,9 +47,9 @@ var vm = new Vue({
             return this.works[this.currentIndex];
         },
         isBaseDone: function () {
-            if (this.current.requiements.alternativeRequirements) return true; 
-            for (key in this.current.requiements) {
-                if (!this.current.requiements[key]) return false;
+            if (this.current.alternativeRequirements) return true; 
+            for (key in this.current.requirements) {
+                if (!this.current.requirements[key]) return false;
             }
             return true;
         },
@@ -63,6 +63,7 @@ var vm = new Vue({
                     total++;
                 }
             }
+            total += Math.abs(parseInt(this.current.extraExtraPoints)) - Math.abs(parseInt(this.current.extraPenalty));
             return total;
         },
         latePenaltyTotal: function () {
@@ -78,7 +79,7 @@ var vm = new Vue({
         },
         pointsTotal: function () {
             if (!this.isBaseDone) return 0;
-            return 10 + this.extraPointsTotal + this.current.extraPenalty + this.latePenaltyTotal;
+            return 10 + this.extraPointsTotal + this.latePenaltyTotal;
         }, 
         address: function() {
             return "http://dijkstra.cs.ttu.ee/~" + this.current.dijkstraAddress + "/ui/t2/";
