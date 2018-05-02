@@ -12,6 +12,7 @@ var vm = new Vue({
                 studentCodeOne: "155408IAPB",
                 studentCodeTwo: "155202IAPB", 
                 dijkstraAddress: "evveit",
+                taskType: "regular",
                 requirements: {
                     waitingLine: false,
                     sorting: false,
@@ -91,6 +92,12 @@ var vm = new Vue({
         }, 
         address: function() {
             return "http://dijkstra.cs.ttu.ee/~" + this.current.dijkstraAddress + "/ui/t2/";
+        },
+        taskTypeIsRegular: function () {
+            return this.current.taskType === "regular";
+        },
+        taskTypeIsProject: function () {
+            return this.current.taskType === "project";
         }
     },
     methods: {}
