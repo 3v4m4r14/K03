@@ -48,7 +48,6 @@ var vm = new Vue({
             return this.works[this.currentIndex];
         },
         isBaseDone: function () {
-            if (this.current.alternativeRequirements) return true; 
             for (key in this.current.requirements) {
                 if (!this.current.requirements[key]) return false;
             }
@@ -59,10 +58,17 @@ var vm = new Vue({
             if (this.isBaseDone) {
                 baseStatus.removeClass("req");
                 baseStatus.addClass("ok");
+                this.current.alternativeRequirements = true;
+                return "Korras";
+            } else if (this.current.alternativeRequirements) {
+                baseStatus.removeClass("req");
+                baseStatus.addClass("ok");
+                this.current.alternativeRequirements = true;
                 return "Korras";
             } else {
                 baseStatus.removeClass("ok");
                 baseStatus.addClass("req");
+                this.current.alternativeRequirements = false;
                 return "Puudulik";
             }
         },
