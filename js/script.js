@@ -36,7 +36,6 @@ var vm = new Vue({
                     responsiveDesign: false
                 }, 
                 extraExtraPoints: 0,
-                extraPenalty: 0, 
                 extrasComment: "", 
                 submitted: "onTime", 
                 submittedComment: "1 nädal pikendust."
@@ -79,7 +78,7 @@ var vm = new Vue({
                     total++;
                 }
             }
-            total += Math.abs(parseInt(this.current.extraExtraPoints)) - Math.abs(parseInt(this.current.extraPenalty));
+            total += parseInt(this.current.extraExtraPoints);
             return total;
         },
         latePenaltyTotal: function () {
