@@ -80,6 +80,26 @@
     <hr>
 
     <div class="row">
+        <div id="basePoints" class="col-sm-12 col-lg-6 order-3" v-if="taskTypeIsProject">
+            <form id="projectPointsForm">
+                <div class="box-with-margin">
+                    <h3>Projekt</h3>
+                    <div class="row">
+                        <div class="form-group col-sm">
+                            <label for="projectPoints">Punktid</label>
+                            <input id="projectPoints" class="form-control" type="number"
+                                    v-model="current.projectPoints" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="projectComment">Kommentaar:</label>
+                        <textarea class="form-control" rows="2" id="projectComment"
+                                    v-model="current.projectComment"></textarea>
+                    </div>
+                </div>
+            </form>
+        </div>
+
         <div id="basePoints" class="col-sm-12 col-lg-6 order-3" v-if="taskTypeIsRegular">
             <form id="basePointsForm">
                 <div class="box-with-margin">
@@ -145,7 +165,6 @@
                 </div>
             </form>
         </div>
-
 
         <div id="extraPoints" class="col-sm-12 col-lg-6 order-4" v-if="taskTypeIsRegular">
             <form id="extraPointsForm">

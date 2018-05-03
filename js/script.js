@@ -38,7 +38,9 @@ var vm = new Vue({
                 extraExtraPoints: 0,
                 extrasComment: "", 
                 submitted: "onTime", 
-                submittedComment: "1 nädal pikendust."
+                submittedComment: "1 nädal pikendust.", 
+                projectPoints: 0, 
+                projectComment: ""
             }]
         }
     },
@@ -93,6 +95,9 @@ var vm = new Vue({
             }
         },
         pointsTotal: function () {
+            if (this.taskTypeIsProject) {
+                return parseInt(this.current.projectPoints) + parseInt(this.latePenaltyTotal);
+            }
             if (!this.isBaseDone) return 0;
             return 10 + this.extraPointsTotal + this.latePenaltyTotal;
         }, 
