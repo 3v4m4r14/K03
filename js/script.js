@@ -2,6 +2,7 @@ var vm = new Vue({
     el: "#app",
     data: function () {
         return {
+            deadline: new Date("2015-05-02"), 
             currentIndex: 0,
             students: [
                 { code: "155408IAPB", name: "Eva Maria Veitmaa" },
@@ -109,6 +110,10 @@ var vm = new Vue({
         },
         taskTypeIsProject: function () {
             return this.current.taskType === "project";
+        }, 
+        getDeadline: function () {
+            var months = ["jaanuar", "veebruar", "märts", "aprill", "mai", "juuni", "juuli", "august", "september", "oktoober", "november", "detsember"];
+            return this.deadline.getDate() + " " + months[this.deadline.getMonth()] + " " + this.deadline.getFullYear();
         }
     },
     methods: {}
