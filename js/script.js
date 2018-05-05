@@ -91,6 +91,8 @@ var vm = new Vue({
         },
         isBaseDoneString: function () {
             var baseStatus = $('#baseStatus');
+            var requirementsComment = $('#requirementsComment');
+            requirementsComment.removeAttr('required');
             if (this.isBaseDone) {
                 baseStatus.removeClass("req");
                 baseStatus.addClass("ok");
@@ -100,6 +102,7 @@ var vm = new Vue({
                 baseStatus.removeClass("req");
                 baseStatus.addClass("ok");
                 this.current.alternativeRequirements = true;
+                requirementsComment.attr('required', '');
                 return "Korras";
             } else {
                 baseStatus.removeClass("ok");
@@ -163,8 +166,27 @@ var vm = new Vue({
             }
         },
         getWorkIndex: function (work) {
-            console.log("I'm here.");
             return this.works.indexOf(work);
+        },
+        checkStudentCode: function (id) {
+            console.log(id);
+            var studentCode = document.getElementById(id).value;
+            if (id === 'studentCodeTwo' && studentCode === '') {
+                return true;
+            }
+            return this.validStudentCode(studentCode);
+        },
+        checkDijkstra: function () {
+            var dijkstra = document.getElementById('dijkstraAddress').value;
+            return this.validDijkstra(dijkstra);
+        },
+        validStudentCode: function (code) {
+            var regex = /^\d{6}[a-zA-Z]{4}$/;
+            return regex.test(code);
+        },
+        validDijkstra: function (name) {
+            var regex = /^[a-zA-Z]{6}$/;
+            return regex.test(name);
         }
     }
 });

@@ -54,7 +54,9 @@ h3 {
     background-color: transparent;
     color: #d9534f;
     font-weight: bold;
-    padding-left: 0;
+    padding: 0;
+    display: block;
+    margin-bottom: 100px;
 }
 
 .box-header {
