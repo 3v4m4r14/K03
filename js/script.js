@@ -83,31 +83,42 @@ var vm = new Vue({
         current: function () {
             return this.works[this.currentIndex];
         },
-        isBaseDone: function () {
+        areBaseTasksDone: function () {
             for (key in this.current.requirements) {
                 if (!this.current.requirements[key]) return false;
             }
             return true;
+        }, 
+        hasRequiredComment: function () {
+            return this.current.requirementsComment != "";
+        }, 
+        isBaseDone: function () {
+            return this.areBaseTasksDone || (this.current.alternativeRequirements && this.hasRequiredComment);
         },
+        requireComment: function () {
+            return !this.areBaseTasksDone && this.current.alternativeRequirements && !this.hasRequiredComment;
+        }, 
         isBaseDoneString: function () {
             var baseStatus = $('#baseStatus');
             var requirementsComment = $('#requirementsComment');
             requirementsComment.removeAttr('required');
-            if (this.isBaseDone) {
+            if (this.areBaseTasksDone) {
                 baseStatus.removeClass("req");
                 baseStatus.addClass("ok");
                 this.current.alternativeRequirements = true;
                 return "Korras";
-            } else if (this.current.alternativeRequirements) {
+            } else if (this.isBaseDone) {
                 baseStatus.removeClass("req");
                 baseStatus.addClass("ok");
-                this.current.alternativeRequirements = true;
+                return "Korras";
+            } else if (this.current.alternativeRequirements && !this.hasRequiredComment) {
+                baseStatus.removeClass("ok");
+                baseStatus.addClass("req");
                 requirementsComment.attr('required', '');
-                return "Korras";
+                return "Puudulik";
             } else {
                 baseStatus.removeClass("ok");
                 baseStatus.addClass("req");
-                this.current.alternativeRequirements = false;
                 return "Puudulik";
             }
         },

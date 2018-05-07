@@ -156,6 +156,9 @@
                         <input id="alternativeRequirements" class="form-check-input" type="checkbox"
                                v-model="current.alternativeRequirements">
                         <label class="form-check-label" for="alternativeRequirements">Vastu võetud</label>
+                        <div class="invalid-tooltip" v-if="requireComment">
+                            Töö on ilma baas ülesande täitmist vastu võetud. Vastav kommentaar on puudu.
+                        </div>
                     </div>
 
                     <hr>
