@@ -64,8 +64,8 @@
                             <input id="dijkstraAddress" class="form-control" v-model="current.dijkstraAddress"
                                    type="text"
                                    required>
-                            <div class="invalid-tooltip" v-if="!checkDijkstra()">
-                                Dijkstra kasutajanimi koosneb kuuest tähest (malill).
+                            <div class="invalid-tooltip" v-if="!validDijkstra">
+                                Dijkstra kasutajanimi peab täidetud olema.
                             </div>
                         </div>
                     </div>
@@ -338,8 +338,9 @@
                     </tr>
                     <tr>
                         <th scope="row">Dijkstra aadress</th>
-                        <td style="word-wrap: break-word;min-width: 160px;max-width: 160px;"><a v-bind:href="address"
-                                                                                                target="_blank">{{address}}</a>
+                        <td style="word-wrap: break-word;min-width: 160px;max-width: 160px;">
+                            <a v-bind:href="address" target="_blank" v-if="validDijkstra">{{address}}</a>
+                            <div v-else>{{address}}</div>
                         </td>
                     </tr>
                     <tr v-if="taskTypeIsRegular">
@@ -381,7 +382,10 @@
                 <div class="text-white">{{current.studentCodeOne}}</div>
                 <div class="text-white">{{current.studentCodeTwo}}</div>
 
-                <div><a v-bind:href="address" target="_blank">{{address}}</a></div>
+                <div>
+                    <a v-bind:href="address" target="_blank" v-if="validDijkstra">{{address}}</a>
+                    <div class="text-white" v-else>{{address}}</div>
+                </div>
             </div>
         </div>
         <nav class="navbar navbar-dark bg-dark container">

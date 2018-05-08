@@ -151,6 +151,7 @@ var vm = new Vue({
             return 10 + this.extraPointsTotal + this.latePenaltyTotal;
         },
         address: function () {
+            if (!this.validDijkstra) return "Väli täitmata";
             return "http://dijkstra.cs.ttu.ee/~" + this.current.dijkstraAddress + "/ui/t2/";
         },
         taskTypeIsRegular: function () {
@@ -162,6 +163,10 @@ var vm = new Vue({
         getDeadline: function () {
             var months = ["jaanuar", "veebruar", "märts", "aprill", "mai", "juuni", "juuli", "august", "september", "oktoober", "november", "detsember"];
             return this.deadline.getDate() + " " + months[this.deadline.getMonth()] + " " + this.deadline.getFullYear();
+        }, 
+        validDijkstra: function () {
+            var regex = /^[a-zA-Z.]+$/;
+            return regex.test(this.current.dijkstraAddress);
         }
     },
     methods: {
@@ -186,17 +191,9 @@ var vm = new Vue({
             }
             return this.validStudentCode(studentCode);
         },
-        checkDijkstra: function () {
-            var dijkstra = document.getElementById('dijkstraAddress').value;
-            return this.validDijkstra(dijkstra);
-        },
         validStudentCode: function (code) {
             var regex = /^\d{6}[a-zA-Z]{4}$/;
             return regex.test(code);
-        },
-        validDijkstra: function (name) {
-            var regex = /^[a-zA-Z]{6}$/;
-            return regex.test(name);
         },
         checkSubmitConditions: function () {
             if (this.canSubmit()) {
@@ -210,9 +207,9 @@ var vm = new Vue({
         },
         canSubmit: function () {
             if (this.current.taskType === 'regular') {
-                return this.baseIsDone && this.checkDijkstra() && this.checkStudentCode('studentCodeOne') && this.checkStudentCode('studentCodeTwo');
+                return this.baseIsDone && this.validDijkstra && this.checkStudentCode('studentCodeOne') && this.checkStudentCode('studentCodeTwo');
             } else {
-                return this.checkDijkstra() && this.checkStudentCode('studentCodeOne') && this.checkStudentCode('studentCodeTwo') && this.current.projectComment != "";
+                return this.validDijkstra && this.checkStudentCode('studentCodeOne') && this.checkStudentCode('studentCodeTwo') && this.current.projectComment != "";
             }
         }
     }
