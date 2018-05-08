@@ -1,7 +1,3 @@
-html {
-    overflow-y: scroll;
-}
-
 body {
     background-color: #fcfcfc;
 }
@@ -24,6 +20,10 @@ table {
 
 h3 {
     margin-bottom: 0.7em;
+}
+
+#submissionMsg {
+    display: none;
 }
 
 .wrapped {
@@ -52,7 +52,7 @@ h3 {
 
 .invalid-tooltip {
     background-color: transparent;
-    color: #d9534f;
+    color: red;
     font-weight: bold;
     padding: 0;
     display: block;

@@ -83,31 +83,31 @@ var vm = new Vue({
         current: function () {
             return this.works[this.currentIndex];
         },
-        areBaseTasksDone: function () {
+        baseTasksAreDone: function () {
             for (key in this.current.requirements) {
                 if (!this.current.requirements[key]) return false;
             }
             return true;
-        }, 
+        },
         hasRequiredComment: function () {
-            return this.current.requirementsComment != "";
-        }, 
-        isBaseDone: function () {
-            return this.areBaseTasksDone || (this.current.alternativeRequirements && this.hasRequiredComment);
+            return this.current.requirementsComment !== "";
+        },
+        baseIsDone: function () {
+            return this.baseTasksAreDone || (this.current.alternativeRequirements && this.hasRequiredComment);
         },
         requireComment: function () {
-            return !this.areBaseTasksDone && this.current.alternativeRequirements && !this.hasRequiredComment;
-        }, 
+            return !this.baseTasksAreDone && this.current.alternativeRequirements && !this.hasRequiredComment;
+        },
         isBaseDoneString: function () {
             var baseStatus = $('#baseStatus');
             var requirementsComment = $('#requirementsComment');
             requirementsComment.removeAttr('required');
-            if (this.areBaseTasksDone) {
+            if (this.baseTasksAreDone) {
                 baseStatus.removeClass("req");
                 baseStatus.addClass("ok");
                 this.current.alternativeRequirements = true;
                 return "Korras";
-            } else if (this.isBaseDone) {
+            } else if (this.baseIsDone) {
                 baseStatus.removeClass("req");
                 baseStatus.addClass("ok");
                 return "Korras";
@@ -147,7 +147,7 @@ var vm = new Vue({
             if (this.taskTypeIsProject) {
                 return parseInt(this.current.projectPoints) + parseInt(this.latePenaltyTotal);
             }
-            if (!this.isBaseDone) return 0;
+            if (!this.baseIsDone) return 0;
             return 10 + this.extraPointsTotal + this.latePenaltyTotal;
         },
         address: function () {
@@ -180,7 +180,6 @@ var vm = new Vue({
             return this.works.indexOf(work);
         },
         checkStudentCode: function (id) {
-            console.log(id);
             var studentCode = document.getElementById(id).value;
             if (id === 'studentCodeTwo' && studentCode === '') {
                 return true;
@@ -198,6 +197,23 @@ var vm = new Vue({
         validDijkstra: function (name) {
             var regex = /^[a-zA-Z]{6}$/;
             return regex.test(name);
+        },
+        checkSubmitConditions: function () {
+            if (this.canSubmit()) {
+                $('#submissionMsg').hide();
+                $('html, body').animate({scrollTop: 0});
+                window.location.reload();
+            } else {
+                $('#submissionMsg').show();
+                $('html, body').animate({scrollTop: 0}, 'fast');
+            }
+        },
+        canSubmit: function () {
+            if (this.current.taskType === 'regular') {
+                return this.baseIsDone && this.checkDijkstra() && this.checkStudentCode('studentCodeOne') && this.checkStudentCode('studentCodeTwo');
+            } else {
+                return this.checkDijkstra() && this.checkStudentCode('studentCodeOne') && this.checkStudentCode('studentCodeTwo');
+            }
         }
     }
 });
