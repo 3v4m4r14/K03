@@ -104,6 +104,9 @@
                             <label for="projectPoints">Punktid</label>
                             <input id="projectPoints" class="form-control" type="number"
                                    v-model="current.projectPoints" required>
+                                <div class="invalid-tooltip" v-if="current.projectComment == ''">
+                                    Kommentaar on vajalik.
+                                </div>
                         </div>
                     </div>
                     <div class="form-group">
@@ -163,7 +166,7 @@
                                v-model="current.alternativeRequirements" required>
                         <label class="form-check-label" for="alternativeRequirements">Vastu võetud<span class="req"> *</span></label>
                         <div class="invalid-tooltip" v-if="requireComment">
-                            Vajalik on kommentaar.
+                            Kommentaar on vajalik.
                         </div>
                     </div>
 

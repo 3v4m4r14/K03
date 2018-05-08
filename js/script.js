@@ -212,7 +212,7 @@ var vm = new Vue({
             if (this.current.taskType === 'regular') {
                 return this.baseIsDone && this.checkDijkstra() && this.checkStudentCode('studentCodeOne') && this.checkStudentCode('studentCodeTwo');
             } else {
-                return this.checkDijkstra() && this.checkStudentCode('studentCodeOne') && this.checkStudentCode('studentCodeTwo');
+                return this.checkDijkstra() && this.checkStudentCode('studentCodeOne') && this.checkStudentCode('studentCodeTwo') && this.current.projectComment != "";
             }
         }
     }
