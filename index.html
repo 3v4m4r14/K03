@@ -42,7 +42,7 @@
                             <input id="studentCodeOne" class="form-control" v-model="current.studentCodeOne"
                                    v-on:input="searchPrevious('studentCodeOne')" type="text"
                                    required>
-                            <div class="invalid-tooltip" v-if="!checkStudentCode('studentCodeOne')">
+                            <div class="my-tooltip" v-if="!checkStudentCode('studentCodeOne')">
                                 Üliõpilaskood peab olema kujul 123456ABCD.
                             </div>
                         </div>
@@ -52,7 +52,7 @@
                             <input id="studentCodeTwo" class="form-control" v-model="current.studentCodeTwo"
                                    v-on:input="searchPrevious('studentCodeOne')"
                                    type="text">
-                            <div class="invalid-tooltip" v-if="!checkStudentCode('studentCodeTwo')">
+                            <div class="my-tooltip" v-if="!checkStudentCode('studentCodeTwo')">
                                 Üliõpilaskood peab olema kujul 123456ABCD.
                             </div>
                         </div>
@@ -64,8 +64,8 @@
                             <input id="dijkstraAddress" class="form-control" v-model="current.dijkstraAddress"
                                    type="text"
                                    required>
-                            <div class="invalid-tooltip" v-if="!validDijkstra">
-                                Dijkstra kasutajanimi peab täidetud olema.
+                            <div class="my-tooltip" v-if="!validDijkstra">
+                                Dijkstra kasutajanimi peab olema täidetud.
                             </div>
                         </div>
                     </div>
@@ -104,7 +104,7 @@
                             <label for="projectPoints">Punktid</label>
                             <input id="projectPoints" class="form-control" type="number"
                                    v-model="current.projectPoints" required>
-                                <div class="invalid-tooltip" v-if="current.projectComment == ''">
+                                <div class="my-tooltip" v-if="current.projectComment == ''">
                                     Kommentaar on vajalik.
                                 </div>
                         </div>
@@ -165,9 +165,7 @@
                         <input id="alternativeRequirements" class="form-check-input" type="checkbox"
                                v-model="current.alternativeRequirements" required>
                         <label class="form-check-label" for="alternativeRequirements">Vastu võetud<span class="req"> *</span></label>
-                        <div class="invalid-tooltip" v-if="requireComment">
-                            Kommentaar on vajalik.
-                        </div>
+
                     </div>
 
                     <hr>
@@ -176,11 +174,14 @@
                         <label for="requirementsComment">Kommentaar:</label>
                         <textarea class="form-control" rows="2" id="requirementsComment"
                                   v-model="current.requirementsComment"></textarea>
+                        <div class="my-tooltip" v-if="requireComment">
+                            Kommentaar on vajalik, kui töö on vastu võetud ilma kõiki baasülesandeid täitmata.
+                        </div>
                     </div>
 
                     <div class="row">
                         <div class="col-sm">
-                            <h5 id="baseStatus" class="req">{{isBaseDoneString}}</h5>
+                            <h5 id="baseStatus" class="req">{{baseCompletionMsg}}</h5>
                         </div>
                     </div>
                 </div>
@@ -256,7 +257,7 @@
 
                     <div class="row">
                         <div class="form-group col-sm">
-                            <label for="alternativeExtraPoints">Muud lisapunktid</label>
+                            <label for="alternativeExtraPoints">Muud punktid (boonus/trahv)</label>
                             <input id="alternativeExtraPoints" class="form-control" type="number"
                                    v-model="current.extraExtraPoints" required>
                         </div>
@@ -314,7 +315,7 @@
 
                     <div class="row">
                         <div class="col-sm">
-                            <h5>Trahvipunkte: {{latePenaltyTotal}}</h5>
+                            <h5>Hilinemise trahvipunkte: {{latePenaltyTotal}}</h5>
                         </div>
                     </div>
                 </div>
@@ -345,7 +346,7 @@
                     </tr>
                     <tr v-if="taskTypeIsRegular">
                         <th scope="row">Baasülesande punktid</th>
-                        <td>{{isBaseDoneString}}</td>
+                        <td>{{baseTaskPointsTotal}}</td>
                     </tr>
                     <tr v-if="taskTypeIsRegular">
                         <th scope="row">Lisapunktid</th>

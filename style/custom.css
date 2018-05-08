@@ -50,13 +50,19 @@ h3 {
     margin-top: 1em;
 }
 
-.invalid-tooltip {
+.my-tooltip {
     background-color: transparent;
     color: red;
     font-weight: bold;
     padding: 0;
     display: block;
-    margin-bottom: 100px;
+    top: 100%;
+    z-index: 5;
+    max-width: 100%;
+    margin-top: .1rem;
+    font-size: .875rem;
+    line-height: 1;
+    border-radius: .2rem;
 }
 
 .box-header {

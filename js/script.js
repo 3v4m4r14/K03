@@ -98,7 +98,7 @@ var vm = new Vue({
         requireComment: function () {
             return !this.baseTasksAreDone && this.current.alternativeRequirements && !this.hasRequiredComment;
         },
-        isBaseDoneString: function () {
+        baseCompletionMsg: function () {
             var baseStatus = $('#baseStatus');
             var requirementsComment = $('#requirementsComment');
             requirementsComment.removeAttr('required');
@@ -121,6 +121,13 @@ var vm = new Vue({
                 baseStatus.addClass("req");
                 return "Puudulik";
             }
+        },
+        baseTaskPointsTotal: function () {
+            var total = 0;
+            for (key in this.current.requirements) {
+                if (this.current.requirements[key]) total++;
+            }
+            return total;
         },
         extraPointsTotal: function () {
             var total = 0;
@@ -209,7 +216,7 @@ var vm = new Vue({
             if (this.current.taskType === 'regular') {
                 return this.baseIsDone && this.validDijkstra && this.checkStudentCode('studentCodeOne') && this.checkStudentCode('studentCodeTwo');
             } else {
-                return this.validDijkstra && this.checkStudentCode('studentCodeOne') && this.checkStudentCode('studentCodeTwo') && this.current.projectComment != "";
+                return this.validDijkstra && this.checkStudentCode('studentCodeOne') && this.checkStudentCode('studentCodeTwo') && this.current.projectComment !== "";
             }
         }
     }
